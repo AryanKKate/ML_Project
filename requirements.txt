@@ -9,3 +9,8 @@ matplotlib
 scikit-learn
 docx
 pymupdf
+
+pytesseract
+pdf2image
+Pillow
+
