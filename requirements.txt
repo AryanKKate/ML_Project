@@ -1,7 +1,11 @@
 streamlit
 spacy
+en-core-web-sm
 wordcloud
 python-docx
 PyMuPDF
 matplotlib
 scikit-learn
+base64
+fitz
+docx
