@@ -1,0 +1,7 @@
+streamlit
+spacy
+wordcloud
+python-docx
+PyMuPDF
+matplotlib
+scikit-learn
