@@ -1,7 +1,8 @@
 import streamlit as st
 import pickle
 import spacy
-import fitz
+import pdfplumber
+from io import BytesIO
 from docx import Document
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
@@ -164,9 +165,15 @@ def predict_category(text):
     pred = model_pipeline.predict([cleaned])[0]
     return category_mapping.get(pred, "Unknown")
 
+
 def extract_text_from_pdf(file):
-    with fitz.open(stream=file.read(), filetype="pdf") as doc:
-        return "\n".join(page.get_text() for page in doc)
+    text = ""
+    with pdfplumber.open(BytesIO(file.read())) as pdf:
+        for page in pdf.pages:
+            page_text = page.extract_text()
+            if page_text:
+                text += page_text + "\n"
+    return text
 
 def extract_text_from_docx(file):
     doc = Document(file)
