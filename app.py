@@ -169,7 +169,7 @@ def predict_category(text):
     return category_mapping.get(pred, "Unknown")
 
 
-def extract_text_from_scanned_pdf(file):
+def extract_text_from_pdf(file):
     images = convert_from_bytes(file.read())  
     text = ""
     for img in images:
