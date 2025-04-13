@@ -9,6 +9,7 @@ import pandas as pd
 import time
 import base64
 from io import BytesIO
+import spacy.cli
 
 st.set_page_config(
     page_title="Resume Classifier",
@@ -99,12 +100,18 @@ button[kind="primary"]:focus {
 
 
 @st.cache_resource
+
+
 def load_spacy():
     try:
+        # Attempt to load the model
         return spacy.load("en_core_web_sm")
-    except:
-        import spacy.cli
+    except Exception as e:
+        # Catch any exception, log it, and download the model
+        print(f"Error loading model: {e}")
+        print("Downloading 'en_core_web_sm' model...")
         spacy.cli.download("en_core_web_sm")
+        # Return the model after downloading
         return spacy.load("en_core_web_sm")
 
 nlp = load_spacy()
