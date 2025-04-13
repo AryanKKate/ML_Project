@@ -1,6 +1,5 @@
 streamlit
 spacy
-en-core-web-sm
 wordcloud
 python-docx
 PyMuPDF
