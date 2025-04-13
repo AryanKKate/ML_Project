@@ -170,10 +170,10 @@ def predict_category(text):
 
 
 def extract_text_from_pdf(file):
-    images = convert_from_bytes(file.read())  
-    text = ""
-    for img in images:
-        text += pytesseract.image_to_string(img)
+    with pdfplumber.open(file) as pdf:
+        text = ""
+        for page in pdf.pages:
+            text += page.extract_text()  # Extract text from each page
     return text
 
 def extract_text_from_docx(file):
