@@ -6,3 +6,6 @@ python-docx
 PyMuPDF
 matplotlib
 scikit-learn
+base64
+fitz
+docx
