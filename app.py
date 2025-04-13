@@ -11,6 +11,9 @@ import time
 import base64
 from io import BytesIO
 import spacy.cli
+import pytesseract
+from pdf2image import convert_from_bytes
+from PIL import Image
 
 st.set_page_config(
     page_title="Resume Classifier",
@@ -166,13 +169,11 @@ def predict_category(text):
     return category_mapping.get(pred, "Unknown")
 
 
-def extract_text_from_pdf(file):
+def extract_text_from_scanned_pdf(file):
+    images = convert_from_bytes(file.read())  
     text = ""
-    with pdfplumber.open(BytesIO(file.read())) as pdf:
-        for page in pdf.pages:
-            page_text = page.extract_text()
-            if page_text:
-                text += page_text + "\n"
+    for img in images:
+        text += pytesseract.image_to_string(img)
     return text
 
 def extract_text_from_docx(file):
