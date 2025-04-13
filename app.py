@@ -1,7 +1,7 @@
 import streamlit as st
 import pickle
 import spacy
-
+import fitz
 from docx import Document
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
