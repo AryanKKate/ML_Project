@@ -1,7 +1,8 @@
 import streamlit as st
 import pickle
 import spacy
-import fitz  
+import pdfplumber
+from io import BytesIO
 from docx import Document
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
@@ -10,6 +11,9 @@ import time
 import base64
 from io import BytesIO
 import spacy.cli
+import pytesseract
+from pdf2image import convert_from_bytes
+from PIL import Image
 
 st.set_page_config(
     page_title="HireSight",
@@ -164,9 +168,13 @@ def predict_category(text):
     pred = model_pipeline.predict([cleaned])[0]
     return category_mapping.get(pred, "Unknown")
 
+
 def extract_text_from_pdf(file):
-    with fitz.open(stream=file.read(), filetype="pdf") as doc:
-        return "\n".join(page.get_text() for page in doc)
+    with pdfplumber.open(file) as pdf:
+        text = ""
+        for page in pdf.pages:
+            text += page.extract_text()  # Extract text from each page
+    return text
 
 def extract_text_from_docx(file):
     doc = Document(file)
