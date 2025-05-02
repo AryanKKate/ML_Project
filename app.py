@@ -12,7 +12,7 @@ from io import BytesIO
 import spacy.cli
 
 st.set_page_config(
-    page_title="Resume Classifier",
+    page_title="HireSight",
     page_icon="📄",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -244,9 +244,9 @@ def main():
         """)
         
         st.markdown("---")
-        st.caption("© 2025 Resume Classifier AI")
+        st.caption("© 2025 HireSight")
 
-    st.markdown('<h1 class="main-header">Resume Classifier AI</h1>', unsafe_allow_html=True)
+    st.markdown('<h1 class="main-header">HireSight🔎</h1>', unsafe_allow_html=True)
     st.markdown("Analyze your resume and discover the most suitable job role using advanced AI")
     
     if not model_loaded:
